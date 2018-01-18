@@ -19,9 +19,9 @@ trait InteractsWithModel
         return $model;
     }
 
-    public function updateModel(Model $model, $id)
+    public function updateModel(Request $request, $id)
     {
-        return $this->createModel($model, $id);
+        return $this->createModel($request, $id);
     }
 
     public function findModel($id)
