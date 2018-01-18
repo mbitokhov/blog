@@ -43,6 +43,7 @@ trait InteractsWithModel
     public function index(Request $request, $id)
     {
         $model = $this->getModel();
+        $model = new $model;
 
         $inputs = $request->all();
         foreach($inputs as $column => $input)
