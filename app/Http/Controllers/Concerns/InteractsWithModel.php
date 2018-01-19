@@ -45,26 +45,28 @@ trait InteractsWithModel
 
     public function index(Request $request)
     {
-        $model = $this->query();
+        $query = $this->query();
+        $model = $this->getModel();
+        $model = new $model;
 
         $inputs = $request->all();
 
-        if(in_array('\App\Concerns\Searchable', class_uses($model)))
+        if(in_array('App\Concerns\Searchable', class_uses($model)))
         {
-            $fields = $model::searchable($inputs);
+            $fields = $model->searchable($inputs);
         } else {
             $fields = array_intersect_key($inputs, array_flip($model->getFillable()));
         }
 
         foreach($fields as $column => $input)
         {
-            $model->where($column, 'like', '%'.$input.'%');
+            $query->where($column, 'like', '%'.$input.'%');
         }
 
-        $model = $model->simplePaginate();
-        $model->appends($request->query->all());
+        $query = $query->simplePaginate();
+        $query->appends($request->query->all());
 
-        return $model;
+        return $query;
     }
     protected function getModel()
     {
