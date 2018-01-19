@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class SandboxController extends Controller
 {
     /**
@@ -14,27 +16,27 @@ class SandboxController extends Controller
         //
     }
 
-    public function getModel()
+    public function getModel(Request $request, $id)
     {
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
     }
 
-    public function createModel()
+    public function createModel(Request $request)
     {
 
     }
 
-    public function updateModel()
+    public function updateModel(Request $request, $id)
     {
 
     }
 
-    public function deleteModel()
+    public function deleteModel(Request $request, $id)
     {
 
     }
