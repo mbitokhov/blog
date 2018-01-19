@@ -1,11 +1,14 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace App\Http\Controllers\Concerns;
+
+use Illuminate\Http\Request;
 
 trait InteractsWithModel
 {
+    abstract protected function query();
     /**
-     * 
+     *
      *
      */
     public function createModel(Request $request, $id=null)
@@ -40,19 +43,21 @@ trait InteractsWithModel
         return $model;
     }
 
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
-        $model = $this->getModel();
-        $model = new $model;
+        $model = $this->query();
 
         $inputs = $request->all();
-        foreach($inputs as $column => $input)
-        {
-            if(! $model->isFillable($input))
-            {
-                continue;
-            }
 
+        if(in_array('\App\Concerns\Searchable', class_uses($model)))
+        {
+            $fields = $model::searchable($inputs);
+        } else {
+            $fields = array_intersect_key($inputs, array_flip($model->getFillable()));
+        }
+
+        foreach($fields as $column => $input)
+        {
             $model->where($column, 'like', '%'.$input.'%');
         }
 
@@ -65,7 +70,7 @@ trait InteractsWithModel
     {
         $controller = class_basename($this);
         $model      = substr($controller, 0, -1 * strlen('controller'));
-        $model      = 'App/'.$model;
+        $model      = 'App\\'.$model;
 
         return $model;
     }
