@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Concerns\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogPost extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,15 @@ class BlogPost extends Model
         'user',
         'user_id',
         'released'
+    ];
+
+    protected $searchable = [
+        'title'      => 'blog_posts.title',
+        'user_id'    => 'blog_posts.user_id',
+        'released'   => 'blog_posts.released',
+        'nickname'   => 'users.nickname',
+        'first_name' => 'users.first_name',
+        'last_name'  => 'users.last_name',
     ];
 
     protected $dates = [
