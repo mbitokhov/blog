@@ -42,7 +42,7 @@ class BlogPost extends BaseModel
         'released'
     ];
 
-    public function scopeUser($query)
+    public function scopeWithUsers($query)
     {
         return $query->join('users','users.id','blog_posts.user_id');
     }
