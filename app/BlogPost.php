@@ -38,6 +38,16 @@ class BlogPost extends Model
         'deleted_at'
     ];
 
+    protected $appends = [
+        'user',
+        'released'
+    ];
+
+    public function scopeUser($query)
+    {
+        return $query->join('users','users.id','blog_posts.user_id');
+    }
+
     public function getUserAttribute()
     {
         return User::find($this->user_id);
@@ -50,7 +60,7 @@ class BlogPost extends Model
 
     public function getReleasedAttribute()
     {
-        return filter_var($this->released_at, FILTER_VALIDATE_BOOLAEN);
+        return ! is_null($this->released_at);
     }
 
     public function setReleasedAttribute($value)
