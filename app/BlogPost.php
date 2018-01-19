@@ -3,10 +3,9 @@
 namespace App;
 
 use App\Concerns\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BlogPost extends Model
+class BlogPost extends BaseModel
 {
     use SoftDeletes, Searchable;
 
