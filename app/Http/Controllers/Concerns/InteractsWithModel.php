@@ -53,14 +53,18 @@ trait InteractsWithModel
 
         if(in_array('App\Concerns\Searchable', class_uses($model)))
         {
-            $fields = $model->searchable($inputs);
+            $fields = $model->getTables($inputs);
+            // $fields is now a list of expected values mapped to the tables
         } else {
-            $fields = array_intersect_key($inputs, array_flip($model->getFillable()));
+            $fields = array_intersect_key(array_flip($model->getFillable()), $inputs);
+            $fields = array_combine($fields, array_flip($fields));
+            // $fields is now all of the values that are in fillable that was
+            // sent with request. Then on top of that it's mapped to itself
         }
 
-        foreach($fields as $column => $input)
+        foreach($fields as $input => $column)
         {
-            $query->where($column, 'like', '%'.$input.'%');
+            $query->where($column, 'like', '%' . $inputs[$input] . '%');
         }
 
         $query = $query->simplePaginate();
