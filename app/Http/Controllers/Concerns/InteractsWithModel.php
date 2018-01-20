@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 trait InteractsWithModel
 {
-    abstract protected function query();
     /**
      *
      *
@@ -45,26 +44,21 @@ trait InteractsWithModel
 
     public function index(Request $request)
     {
-        $query = $this->query();
         $model = $this->getModel();
         $model = new $model;
 
-        $inputs = $request->all();
-
-        if(in_array('App\Concerns\Searchable', class_uses($model)))
-        {
+        if($model->hasSearchableTrait()) {
+            $inputs = $request->all();
             $fields = $model->getTables($inputs);
             // $fields is now a list of expected values mapped to the tables
-        } else {
-            $fields = array_intersect_key(array_flip($model->getFillable()), $inputs);
-            $fields = array_combine($fields, array_flip($fields));
-            // $fields is now all of the values that are in fillable that was
-            // sent with request. Then on top of that it's mapped to itself
-        }
 
-        foreach($fields as $input => $column)
-        {
-            $query->where($column, 'like', '%' . $inputs[$input] . '%');
+            $query = $model->searchQuery();
+            foreach($fields as $input => $column)
+            {
+                $query->where($column, 'like', '%' . $inputs[$input] . '%');
+            }
+        } else {
+            $query = $model;
         }
 
         $query = $query->simplePaginate();
@@ -72,6 +66,7 @@ trait InteractsWithModel
 
         return $query;
     }
+
     protected function getModel()
     {
         $controller = class_basename($this);
