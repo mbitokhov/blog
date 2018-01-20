@@ -34,13 +34,18 @@ class BlogPost extends BaseModel
 
     protected $dates = [
         'released_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $appends = [
         'user',
-        'released'
+        'released',
     ];
+
+    public function scopeSearchQuery($query)
+    {
+        return $query->withUsers();
+    }
 
     public function scopeWithUsers($query)
     {

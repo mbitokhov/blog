@@ -18,9 +18,4 @@ class BlogPostController extends Controller
     {
         //
     }
-
-    protected function query()
-    {
-        return BlogPost::withUsers();
-    }
 }

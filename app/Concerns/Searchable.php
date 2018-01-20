@@ -6,6 +6,11 @@ trait Searchable
 {
     protected static $hasSearchableTrait = true;
 
+    public function scopeSearchQuery($query)
+    {
+        return $query;
+    }
+
     public function getSearchable()
     {
         return $this->searchable;
