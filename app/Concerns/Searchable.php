@@ -4,6 +4,8 @@ namespace App\Concerns;
 
 trait Searchable
 {
+    protected static $hasSearchableTrait = true;
+
     public function getSearchable()
     {
         return $this->searchable;

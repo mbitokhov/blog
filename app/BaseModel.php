@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
+    protected static $hasSearchableTrait = false;
 
+    public static function hasSearchableTrait() {
+        return $this->hasSearchableTrait;
+    }
 }
