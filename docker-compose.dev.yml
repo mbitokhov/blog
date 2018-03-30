@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile.web
+    ports:
+      - "3080:80"
+    volumes:
+      - ./:/home/blag
+    links:
+      - app
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.app 
+    volumes:
+      - ./:/home/blag
+    links:
+      - db
+      - redis
+  db:
+    image: mysql:5
+    volumes:
+      - dev-data:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_USER=${DB_USERNAME}"
+      - "MYSQL_PASSWORD=password"
+      - "MYSQL_DATABASE=${DB_DATABASE}"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:mysql
+    ports:
+      - 3082:80
+  redis:
+    image: redis:latest
+    mem_limit: 500MB
+  
+volumes:
+  dev-data:
+    driver: local

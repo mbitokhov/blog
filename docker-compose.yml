@@ -4,24 +4,24 @@ services:
   web:
     build:
       context: ./
-      dockerfile: docker/web
-    volumes:
-      - ./:/home/blog
+      dockerfile: Dockerfile.web
     ports:
-      - "8080:80"
+      - "80:80"
+    volumes:
+      - code:/home/blag
     links:
       - app
   app:
     build:
       context: ./
-      dockerfile: docker/app
+      dockerfile: Dockerfile.app 
     volumes:
-      - ./:/home/blog
+      - code:/home/blag
     links:
       - db
       - redis
   db:
-    image: mysql:5.7
+    image: mysql:5
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
@@ -29,16 +29,12 @@ services:
       - "MYSQL_USER=${DB_USERNAME}"
       - "MYSQL_PASSWORD=${DB_PASSWORD}"
       - "MYSQL_DATABASE=${DB_DATABASE}"
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    links:
-      - db:mysql
-    ports:
-      - 8082:80
   redis:
     image: redis:latest
     mem_limit: 500MB
-
+  
 volumes:
   mysql_data:
+    driver: local
+  code:
     driver: local
