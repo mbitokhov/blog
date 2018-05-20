@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home')
+        ->with('navigation', 'home')
+        ->with('notifications', [['type'=>null, 'info'=>'notification']]);
 });
