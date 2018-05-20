@@ -23,6 +23,7 @@ class CreatePageViewsTable extends Migration
             $table->foreign('blog_post_id')->references('id')->on('blog_posts');
 
             $table->integer('views')->default(0);
+            $table->index('views');
             $table->timestamps();
         });
     }
