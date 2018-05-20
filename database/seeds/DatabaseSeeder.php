@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
 
-        if (strtolower(env('APP_ENV')) !== 'production') {
+        if (strtolower(config('app.env')) !== 'production') {
             $this->call('FakeDataSeeder');
         }
 
