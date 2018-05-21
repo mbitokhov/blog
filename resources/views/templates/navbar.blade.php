@@ -1,7 +1,7 @@
 <nav class="navbar is-dark">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item" href="{{ url('/') }}">Michael Bitokhov</a>
+            <a class="navbar-item" href="{{ urls('/') }}">Michael Bitokhov</a>
             <div id="navbarBurger" class="navbar-burger burger">
                 <span></span>
                 <span></span>
@@ -10,16 +10,16 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item{{$navigation === 'home' ? ' is-active' : ''}}" href="{{ url('/') }}">
+                <a class="navbar-item{{$navigation === 'home' ? ' is-active' : ''}}" href="{{ urls('/') }}">
                     Home
                 </a>
-                <a class="navbar-item{{$navigation === 'blags' ? ' is-active' : ''}}" href="{{ url('blags') }}">
+                <a class="navbar-item{{$navigation === 'blags' ? ' is-active' : ''}}" href="{{ urls('blags') }}">
                     Blags
                 </a>
-                <a class="navbar-item{{$navigation === 'about-me' ? ' is-active' : ''}}" href="{{ url('about-me') }}">
+                <a class="navbar-item{{$navigation === 'about-me' ? ' is-active' : ''}}" href="{{ urls('about-me') }}">
                     About me
                 </a>
-                <a class="navbar-item{{$navigation === 'resume' ? ' is-active' : ''}}" href="{{ url('resume') }}">
+                <a class="navbar-item{{$navigation === 'resume' ? ' is-active' : ''}}" href="{{ urls('resume') }}">
                     Resume
                 </a>
                 <a class="navbar-item" href="https://github.com/mbitokhov">
