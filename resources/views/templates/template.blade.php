@@ -10,7 +10,7 @@
         @else
           <title> {{ config('app.name') }} </title>
         @endif
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css', true) }}" />
     </head>
     <body>
         @include('templates.navbar')
@@ -28,6 +28,6 @@
 
 
         @include('templates.footer')
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js', true) }}"></script>
     </body>
 </html>
