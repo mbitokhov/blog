@@ -1,8 +1,8 @@
 # blog
 Personal Blog + misc site
 
-Creating a personal blogging site using the Laravel/Lumen framework
+Creating a personal blogging site using the Laravel/Lumen framework. Functionality, currently, is limited, but the demo is hosted in https://live.mbitokhov.com
 
-Any code that I've personally written, using the Laravel/Lumen framework is in the public domain under the Unlicense agreement. Due to the nature of using a framework, please use care when attributing code to me. Code that came with the framework is licensed under the MIT license
+Any code that I've personally written, using the Laravel/Lumen framework is in the public domain under the Unlicense agreement and is available for free use
 
-For more information about Unlicense, please refer to <http://unlicense.org/>. For more information about the MIT license, please refer to <https://opensource.org/licenses/MIT/>, or the original project, <https://github.com/laravel/laravel/>
+For more information about Unlicense, please refer to <http://unlicense.org/>
