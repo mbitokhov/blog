@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     /**
      * The current request
-     * 
+     *
      * @var \Illumiante\Http\Request;
      */
     protected $request;

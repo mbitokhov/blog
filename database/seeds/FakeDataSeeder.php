@@ -12,7 +12,7 @@ class FakeDataSeeder extends BaseSeeder
      */
     public function run()
     {
-        if (strtolower(config('app.env')) === 'production') {
+        if (mb_strtolower(config('app.env')) === 'production') {
             return;
         }
         $step = 10;
@@ -22,9 +22,9 @@ class FakeDataSeeder extends BaseSeeder
         // it seems the slowdown is writing to disk, so there's nothing to do about it
 
         $blogPosts = 50000;
-        
+
         $bar = $this->createProgressBar('Creating blog posts', $blogPosts);
-        for($i = BlogPost::count(); $i < $blogPosts; $i += $step) {
+        for ($i = BlogPost::count(); $i < $blogPosts; $i += $step) {
             factory(BlogPost::class, $step)->create();
             $bar->setProgress($i);
         }
@@ -32,8 +32,8 @@ class FakeDataSeeder extends BaseSeeder
         $this->command->getOutput()->newLine();
 
         $comments = 10000;
-        $bar = $this->createProgressBar('Creating comments', $comments);
-        for($i = Comment::count(); $i < $comments; $i += $step) {
+        $bar      = $this->createProgressBar('Creating comments', $comments);
+        for ($i = Comment::count(); $i < $comments; $i += $step) {
             factory(Comment::class, $step)->create();
             $bar->setProgress($i);
         }

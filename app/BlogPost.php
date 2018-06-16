@@ -4,20 +4,19 @@ namespace App;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\Model;
 
 class BlogPost extends BaseModel
 {
     protected $fillable = [
         'title',
-        'body'
+        'body',
     ];
 
     protected $dates = [
         'created_at',
         'updated_at',
         'released_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected static function boot()
@@ -27,8 +26,8 @@ class BlogPost extends BaseModel
                 $short_url = Str::random(self::minSizeId());
                 $long_url = Str::random(self::maxSizeId());
 
-                $query = BlogPost::where  ('short_url',  $short_url)
-                                 ->orWhere('long_url',   $long_url);
+                $query = BlogPost::where('short_url', $short_url)
+                                 ->orWhere('long_url', $long_url);
             } while ($query->exists());
 
             $model->short_url = $short_url;
@@ -52,7 +51,7 @@ class BlogPost extends BaseModel
 
     /**
      * Get the minimum size url for the blogpost
-     * 
+     *
      * @return int
      */
     protected static function minSizeId()
@@ -61,7 +60,7 @@ class BlogPost extends BaseModel
             // This is a bit complicated. I want there to be at most a 1% chance
             // to generate a same matching id. And there is only 62 characters
             // to choose from (A-Za-z0-9).
-            // 
+            //
             // ceil(log62($count)) should give us the minimum amount of
             // characters to fit in the amount of blog posts, but since we can
             // only use 1 out of 100, we need to multiple the count by 100
@@ -78,7 +77,7 @@ class BlogPost extends BaseModel
 
     /**
      * Get the maximum size url for the blogpost
-     * 
+     *
      * @return int
      */
     protected static function maxSizeId()

@@ -35,6 +35,5 @@ class SandboxCommand extends BaseCommand
      */
     public function handle()
     {
-
     }
 }

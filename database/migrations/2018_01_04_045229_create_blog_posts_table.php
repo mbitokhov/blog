@@ -29,7 +29,7 @@ class CreateBlogPostsTable extends Migration
             $table->timestamp('released_at')->nullable();
             $table->softDeletes();
 
-            $table->index(['title','released_at']);
+            $table->index(['title', 'released_at']);
         });
     }
 

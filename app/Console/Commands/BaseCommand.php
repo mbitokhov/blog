@@ -14,5 +14,4 @@ abstract class BaseCommand extends Command
 
         return $bar;
     }
-
 }
