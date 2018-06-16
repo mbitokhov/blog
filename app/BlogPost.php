@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Model;
 
 class BlogPost extends BaseModel
 {
@@ -19,6 +20,24 @@ class BlogPost extends BaseModel
         'deleted_at'
     ];
 
+    protected static function boot()
+    {
+        static::creating(function (BlogPost $model) {
+            do {
+                $short_url = Str::random(self::minSizeId());
+                $long_url = Str::random(self::maxSizeId());
+
+                $query = BlogPost::where  ('short_url',  $short_url)
+                                 ->orWhere('long_url',   $long_url);
+            } while ($query->exists());
+
+            $model->short_url = $short_url;
+            $model->long_url = $long_url;
+        });
+
+        parent::boot();
+    }
+
     public function getUrlAttribute()
     {
         $title = Str::slug($this->title);
@@ -29,27 +48,6 @@ class BlogPost extends BaseModel
         $day   = $date->day;
 
         return "/{$year}/{$month}/{$day}/{$title}";
-    }
-
-    /**
-     * 
-     */
-    public function save(array $options = [])
-    {
-        if(! $this->exists) {
-            do {
-                $short_url = Str::random(self::minSizeId());
-                $long_url = Str::random(self::maxSizeId());
-
-                $query = BlogPost::where  ('short_url',  $short_url)
-                                 ->orWhere('long_url',   $long_url);
-            } while ($query->exists());
-
-            $this->short_url = $short_url;
-            $this->long_url = $long_url;
-        }
-
-        return parent::save($options);
     }
 
     /**
