@@ -1,0 +1,35 @@
+@mixin box-shadow ($setting) {
+  $blur: nth($setting, 1);
+  $spread: nth($setting, 2);
+  $color: nth($setting, 3);
+
+  -webkit-box-shadow: 0px 0px $blur $spread $color;
+  -moz-box-shadow: 0px 0px $blur $spread $color;
+  box-shadow: 0px 0px $blur $spread $color;
+}
+
+$box-shadow-types: (
+  'darkest':  (15px, 3px, rgba(0,0,0,0.5)),
+  'darker':   (13px, 2px, rgba(0,0,0,0.5)),
+  'dark':     (10px, 2px, rgba(0,0,0,0.3)),
+  'normal':   (8px,  2px, rgba(0,0,0,0.25)),
+  'light':    (6px,  2px, rgba(0,0,0,0.2)),
+  'lighter':  (6px,  2px, rgba(0,0,0,0.15)),
+  'lightest': (4px,  2px, rgba(0,0,0,0.1))
+);
+
+@each $type, $setting in $box-shadow-types {
+  .has-shadow-#{$type} {
+    @include box-shadow($setting);
+  }
+}
+
+.has-no-shadow {
+  @include box-shadow((0, 0, transparent));
+}
+
+.has-shadow {
+  $setting: map-get($box-shadow-types, 'light');
+
+  @include box-shadow($setting);
+}

@@ -1,36 +1,25 @@
 // Variables for Bulma
 @import "variables.scss";
-
 // Bulma
 @import "~bulma/bulma.sass";
 
 html {
   background-color: $white-ter;
+}
 
 body {
-display: flex;
-min-height: 100vh;
-flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
 main {
-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
 
 .box {
-  background-color: $white;
-  color: $black-ter;
-  border: 0 solid $white-ter;
   border-radius: 0px;
-  box-shadow: 0 1px 5px $grey;
 }
 
-.inner-box {
-  margin: 90px 50px;
-}
-
-}
-
-}
-
-
-}
-
+@import "helpers.scss";
+@import "box-shadow.scss";
