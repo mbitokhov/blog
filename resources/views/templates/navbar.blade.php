@@ -10,18 +10,28 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item{{$navigation === 'home' ? ' is-active' : ''}}" href="{{ urls('/') }}">
+                <a class="navbar-item {{ Route::getActive('home') }}" href="{{ urls('/') }}">
                     Home
                 </a>
-                <a class="navbar-item{{$navigation === 'blags' ? ' is-active' : ''}}" href="{{ urls('blags') }}">
+                <a class="navbar-item {{ Route::getActive('blags') }}" href="{{ urls('blags') }}">
                     Blags
                 </a>
-                <a class="navbar-item{{$navigation === 'about-me' ? ' is-active' : ''}}" href="{{ urls('about-me') }}">
+                <a class="navbar-item {{ Route::getActive('about-me') }}" href="{{ urls('about-me') }}">
                     About me
                 </a>
-                <a class="navbar-item{{$navigation === 'resume' ? ' is-active' : ''}}" href="{{ urls('resume') }}">
+                <a class="navbar-item {{ Route::getActive('resume') }}" href="{{ urls('resume') }}">
                     Resume
                 </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <div class="navbar-link">
+                        Tools
+                    </div>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{{ route('tools.nutrition-calculator') }}">
+                            Nutrition calculator
+                        </a>
+                    </div>
+                </div>
                 <a class="navbar-item" href="https://github.com/mbitokhov">
                     Github
                 </a>
