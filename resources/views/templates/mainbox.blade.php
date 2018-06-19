@@ -2,7 +2,7 @@
 
 @section('content')
     @component('components.box')
-        <div class="inner-box">
+        <div class="section">
             @yield('inner')
         </div>
     @endcomponent

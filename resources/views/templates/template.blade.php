@@ -16,7 +16,7 @@
         @include('templates.navbar')
 
 
-        <main class="section">
+        <main id="app" class="section">
             <div class="container">
                 @include('templates.notification')
 
