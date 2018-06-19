@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Route::macro('getActive', function ($route) {
+            return $route === $this->currentRouteName() ? 'is-active' : '';
+        });
     }
 }
