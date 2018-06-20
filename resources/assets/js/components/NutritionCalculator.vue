@@ -72,11 +72,6 @@ export default {
       lbm: helpers.getLocalStorage('nutrition-calculator-lbm', 130)
     };
   },
-  filters: {
-    round: function (v) {
-      return Math.round(v)
-    }
-  },
   computed: {
     fatCalories: function () {
       return this.calories * .3

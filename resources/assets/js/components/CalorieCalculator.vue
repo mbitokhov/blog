@@ -78,12 +78,12 @@
               <td>{{ mifflinStJeor | round }}</td>
               <td>{{ mifflinStJeor * fitnessData.activity | round }}</td>
             </tr>
-            <tr>
+            <tr v-if="fitnessData.bodyfat != ''">
               <th>Katch-McArdle</th>
               <td>{{ katchMcArdle | round }}</td>
               <td>{{ katchMcArdle * fitnessData.activity | round }}</td>
             </tr>
-            <tr>
+            <tr v-if="fitnessData.bodyfat != ''">
               <th>Cunningham</th>
               <td>{{ cunningham | round }}</td>
               <td>{{ cunningham * fitnessData.activity | round }}</td>
@@ -109,11 +109,6 @@ export default {
         "activity": null,
         "gender": null
       }`))
-    }
-  },
-  filters: {
-    round: function (v) {
-      return Math.round(v)
     }
   },
   methods: {
