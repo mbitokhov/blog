@@ -67,11 +67,13 @@
 </template>
 
 <script>
+import helpers from '../helpers.js'
+
 export default {
   data: function () {
     return {
-      calories: 1200,
-      lbm: 145
+      calories: helpers.getLocalStorage('nutrition-calculator-calories', 2000),
+      lbm: helpers.getLocalStorage('nutrition-calculator-lbm', 130)
     };
   },
   filters: {
@@ -116,6 +118,14 @@ export default {
     },
     totalPercentage: function () {
       return this.fatPercentage + this.carbPercentage + this.proteinPercentage
+    }
+  },
+  watch: {
+    calories: function (v) {
+      helpers.setLocalStorage('nutrition-calculator-calories', v)
+    },
+    lbm: function (v) {
+      helpers.setLocalStorage('nutrition-calculator-lbm', v)
     }
   }
 }

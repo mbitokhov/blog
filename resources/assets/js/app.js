@@ -1,7 +1,7 @@
 window.$ = require('jquery')
 // window._ = require('lodash')
 
-require('./register_vue.js');
+require('./register_vue.js')
 
 $("#navbarBurger").click(function () {
   $(this).toggleClass('is-active')
