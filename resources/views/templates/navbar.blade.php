@@ -27,6 +27,9 @@
                         Tools
                     </div>
                     <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{{ route('tools.calorie-calculator') }}">
+                            Calorie calculator
+                        </a>
                         <a class="navbar-item" href="{{ route('tools.nutrition-calculator') }}">
                             Nutrition calculator
                         </a>

@@ -16,3 +16,7 @@ Route::get('/', 'HomeController@home')->name('home');
 Route::get('/tools/nutrition-calculator', function () {
     return view('tools.nutrition-calculator');
 })->name('tools.nutrition-calculator');
+
+Route::get('/tools/calorie-calculator', function () {
+    return view('tools.calorie-calculator');
+})->name('tools.calorie-calculator');

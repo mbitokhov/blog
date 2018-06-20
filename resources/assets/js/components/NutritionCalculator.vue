@@ -2,23 +2,19 @@
   <div>
     <div class="columns">
       <div class="column is-one-fifth">
-        <div class="field">
-          <div class="control">
-            <label>
-              Total calories:
-              <input class="input" type="number" v-model="calories">
-            </label>
-          </div>
+        <div class="control">
+          <label for="calories-input" class="label">
+            Total calories:
+          </label>
+          <input id="calories-input" class="input" type="number" v-model="calories">
         </div>
       </div>
       <div class="column is-one-fifth">
-        <div class="field">
-          <div class="control">
-            <label>
-              Lean body mass:
-              <input class="input" type="number" v-model="lbm">
-            </label>
-          </div>
+        <div class="control">
+          <label for="lbm-input" class="label">
+            Lean body mass:
+          </label>
+          <input id="lbm-input" class="input" type="number" v-model="lbm">
         </div>
       </div>
     </div>

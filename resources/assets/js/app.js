@@ -13,5 +13,3 @@ $(".notification > button.delete").each(function () {
     $(this).parent().remove()
   })
 })
-
-
