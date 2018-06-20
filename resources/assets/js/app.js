@@ -1,5 +1,5 @@
 window.$ = require('jquery')
-window._ = require('lodash')
+// window._ = require('lodash')
 
 require('./register_vue.js');
 

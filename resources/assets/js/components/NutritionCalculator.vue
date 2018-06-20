@@ -100,13 +100,13 @@ export default {
       return this.carbCalories / 4
     },
     fatPercentage: function () {
-      return this.fatCalories / this.calories * 100
+      return this.fatCalories / this.totalCalories * 100
     },
     proteinPercentage: function () {
-      return this.proteinCalories / this.calories * 100
+      return this.proteinCalories / this.totalCalories * 100
     },
     carbPercentage: function () {
-      return this.carbCalories / this.calories * 100
+      return this.carbCalories / this.totalCalories * 100
     },
     totalCalories: function () {
       return this.fatCalories + this.carbCalories + this.proteinCalories
