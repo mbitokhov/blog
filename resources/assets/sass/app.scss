@@ -3,36 +3,11 @@
 // Bulma
 @import "~bulma/bulma.sass";
 
-html {
-  background-color: $white-ter;
-}
+// Overwrite both browser and Bulma defaults
+@import "overwrite.scss";
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
-}
-
-@include mobile {
-  #app {
-    padding: 0px;
-  }
-  .section {
-    padding: .5rem .5rem;
-  }
-}
-
-.table-container {
-  overflow-y: hidden;
-}
-
-.box {
-  border-radius: 0px;
-}
-
+// Add helpers
 @import "helpers.scss";
+
+// Add classes for box-shadow
 @import "box-shadow.scss";

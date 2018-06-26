@@ -1,0 +1,49 @@
+// Set background-color to a gray-white color
+html {
+  background-color: $white-ter;
+}
+
+// Force sticky footer
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
+@include mobile {
+	// Remove the outer padding for the main content for mobile
+  #app {
+    padding: 0px;
+  }
+
+	// Move text closer to the sides
+  .section {
+    padding: .5rem .5rem;
+  }
+}
+
+// Make tables more responsive
+.table-container {
+  overflow-y: hidden;
+}
+
+// Remove rounded boxes
+.box {
+  border-radius: 0px;
+}
+
+// Remove spinner for number types for input
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
