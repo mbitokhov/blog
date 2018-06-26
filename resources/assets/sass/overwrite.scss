@@ -6,22 +6,32 @@ html {
 // Force sticky footer
 body {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: column;
 }
-main {
-  flex: 1 0 auto;
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#mainbox {
+  flex: 1;
 }
 
 @include mobile {
 	// Remove the outer padding for the main content for mobile
   #app {
     padding: 0px;
+    margin: 0px;
   }
 
 	// Move text closer to the sides
   .section {
     padding: .5rem .5rem;
+  }
+
+  .notification {
+    margin-bottom: 0px !important;
   }
 }
 

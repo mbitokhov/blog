@@ -16,14 +16,12 @@
         @include('templates.navbar')
 
 
-        <main id="app" class="section">
-            <div class="container">
-                @include('templates.notification')
+        <main id="app" class="container section">
+            @include('templates.notification')
 
-                @yield('content')
+            @yield('content')
 
-                @stack('after-content')
-            </div>
+            @stack('after-content')
         </main>
 
 
