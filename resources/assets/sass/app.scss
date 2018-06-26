@@ -17,6 +17,19 @@ main {
   flex: 1 0 auto;
 }
 
+@include mobile {
+  #app {
+    padding: 0px;
+  }
+  .section {
+    padding: .5rem .5rem;
+  }
+}
+
+.table-container {
+  overflow-y: hidden;
+}
+
 .box {
   border-radius: 0px;
 }

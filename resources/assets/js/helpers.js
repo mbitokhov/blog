@@ -3,7 +3,7 @@ export default {
     if (typeof Storage === "undefined") {
       return;
     }
-    localStorage.setItem(key, val);
+    localStorage.setItem(key, JSON.stringify(val));
   },
   getLocalStorage: function (key, def) {
     if (typeof Storage === "undefined") {
@@ -11,6 +11,6 @@ export default {
     }
     var val = localStorage.getItem(key)
 
-    return val === null ? def : val;
+    return val === null ? def : JSON.parse(val);
   }
 }

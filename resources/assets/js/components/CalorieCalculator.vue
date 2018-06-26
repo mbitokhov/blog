@@ -59,37 +59,39 @@
         </div>
       </div>
       <div class="column">
-        <table class="table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>BMR</th>
-              <th>TDEE</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Harris-Benedict</th>
-              <td>{{ harrisBenedict | round }}</td>
-              <td>{{ harrisBenedict * fitnessData.activity | round }}</td>
-            </tr>
-            <tr>
-              <th>Mifflin-St Jeor</th>
-              <td>{{ mifflinStJeor | round }}</td>
-              <td>{{ mifflinStJeor * fitnessData.activity | round }}</td>
-            </tr>
-            <tr v-if="fitnessData.bodyfat != ''">
-              <th>Katch-McArdle</th>
-              <td>{{ katchMcArdle | round }}</td>
-              <td>{{ katchMcArdle * fitnessData.activity | round }}</td>
-            </tr>
-            <tr v-if="fitnessData.bodyfat != ''">
-              <th>Cunningham</th>
-              <td>{{ cunningham | round }}</td>
-              <td>{{ cunningham * fitnessData.activity | round }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>BMR</th>
+                <th>TDEE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Harris-Benedict</th>
+                <td>{{ harrisBenedict | round }}</td>
+                <td>{{ harrisBenedict * fitnessData.activity | round }}</td>
+              </tr>
+              <tr>
+                <th>Mifflin-St Jeor</th>
+                <td>{{ mifflinStJeor | round }}</td>
+                <td>{{ mifflinStJeor * fitnessData.activity | round }}</td>
+              </tr>
+              <tr v-if="fitnessData.bodyfat != ''">
+                <th>Katch-McArdle</th>
+                <td>{{ katchMcArdle | round }}</td>
+                <td>{{ katchMcArdle * fitnessData.activity | round }}</td>
+              </tr>
+              <tr v-if="fitnessData.bodyfat != ''">
+                <th>Cunningham</th>
+                <td>{{ cunningham | round }}</td>
+                <td>{{ cunningham * fitnessData.activity | round }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -101,19 +103,19 @@ import helpers from '../helpers.js'
 export default {
   data: function () {
     return {
-      fitnessData: JSON.parse(helpers.getLocalStorage('fitness-data', `{
+      fitnessData: helpers.getLocalStorage('fitness-data', {
         "weight": null,
         "bodyfat": null,
         "age": null,
         "height": null,
         "activity": null,
         "gender": null
-      }`))
+      })
     }
   },
   methods: {
     updateLocalStorage: function (e) {
-      helpers.setLocalStorage('fitness-data', JSON.stringify(this.fitnessData))
+      helpers.setLocalStorage('fitness-data', this.fitnessData)
     }
   },
   computed: {

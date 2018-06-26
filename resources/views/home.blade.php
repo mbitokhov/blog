@@ -1,16 +1,13 @@
-@extends('templates.template')
+@extends('templates.mainbox')
 
-@section('content')
-  <div>
-    @foreach(array('darkest', 'darker', 'dark', 'normal', 'light', 'lighter', 'lightest') as $v)
-      <div class="box has-shadow-{{ $v }}">
-        {{$v}}
-      </div>
-    @endforeach
-    @foreach(array('has-shadow', 'has-no-shadow') as $v)
-      <div class="box {{$v}}">
-        {{$v}}
-      </div>
-    @endforeach
+@section('inner')
+  <div class="content">
+      <p>
+          We're still in development. Come back later :)
+      </p>
+
+      <p>
+          Currently the only things working are the tools in the navbar
+      </p>
   </div>
 @endsection

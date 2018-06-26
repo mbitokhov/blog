@@ -19,46 +19,48 @@
       </div>
     </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Grams</th>
-          <th>Calories</th>
-          <th>Percentage</th>
-        </tr>
-      </thead>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Grams</th>
+            <th>Calories</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
 
-      <tfoot>
-        <tr>
-          <th>Total</th>
-          <th>{{ totalGrams | round }}</th>
-          <th>{{ totalCalories | round }}</th>
-          <th>{{ totalPercentage | round }}%</th>
-        </tr>
-      </tfoot>
+        <tfoot>
+          <tr>
+            <th>Total</th>
+            <th>{{ totalGrams | round }}</th>
+            <th>{{ totalCalories | round }}</th>
+            <th>{{ totalPercentage | round }}%</th>
+          </tr>
+        </tfoot>
 
-      <tbody>
-        <tr>
-          <th>Carbs</th>
-          <td>{{ carbGrams | round }}</td>
-          <td>{{ carbCalories | round }}</td>
-          <td>{{ carbPercentage | round }}%</td>
-        </tr>
-        <tr>
-          <th>Protein</th>
-          <td>{{ proteinGrams | round }}</td>
-          <td>{{ proteinCalories | round }}</td>
-          <td>{{ proteinPercentage | round }}%</td>
-        </tr>
-        <tr>
-          <th>Fat</th>
-          <td>{{ fatGrams | round }}</td>
-          <td>{{ fatCalories | round }}</td>
-          <td>{{ fatPercentage | round }}%</td>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr>
+            <th>Carbs</th>
+            <td>{{ carbGrams | round }}</td>
+            <td>{{ carbCalories | round }}</td>
+            <td>{{ carbPercentage | round }}%</td>
+          </tr>
+          <tr>
+            <th>Protein</th>
+            <td>{{ proteinGrams | round }}</td>
+            <td>{{ proteinCalories | round }}</td>
+            <td>{{ proteinPercentage | round }}%</td>
+          </tr>
+          <tr>
+            <th>Fat</th>
+            <td>{{ fatGrams | round }}</td>
+            <td>{{ fatCalories | round }}</td>
+            <td>{{ fatPercentage | round }}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
