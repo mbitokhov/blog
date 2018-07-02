@@ -1,16 +1,21 @@
 // Set background-color to a gray-white color
-html {
+html, body {
   background-color: $white-ter;
+  height: 100%;
 }
 
-// Force sticky footer
-body {
-  min-height: 100vh;
-  flex-direction: column;
-}
 #app {
-  display: flex;
-  flex-direction: column;
+  // this is to force sticky-footer
+  // 9 rem is the height of the footer
+  min-height: calc(100% - 9rem - #{$navbar-height});
+}
+
+.footer {
+  min-height: 9rem;
+}
+
+.notification {
+  margin-bottom: 1.5rem;
 }
 
 @include mobile {
@@ -28,15 +33,6 @@ body {
   .notification {
     margin-bottom: 0px !important;
   }
-
-  #mainbox {
-    flex: 1;
-  }
-}
-
-// Make tables more responsive
-.table-container {
-  overflow-y: hidden;
 }
 
 // Remove rounded boxes
