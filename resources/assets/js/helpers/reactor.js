@@ -22,7 +22,7 @@ function makeSetter(reactor, key) {
   }
 
   function makeMiddlewares(middlewares, next) {
-    for(var i=middlewares.length-1; i >= 0; i--) {
+    for(var i = middlewares.length-1; i >= 0; i--) {
       next = makeMiddleware(middlewares[i], next)
     }
 
@@ -49,11 +49,15 @@ function makeSetter(reactor, key) {
 }
 
 function makeGetter(reactor, key) {
+  var func = () => reactor._data[key];
+
   if (reactor._getters[key] !== undefined) {
-    return reactor._getters[key]
+    return () => {
+      return reactor._getters[key](func())
+    }
   }
 
-  return () => reactor._data[key]
+  return func
 }
 
 function bind(reactor, reactive, key) {
@@ -93,7 +97,13 @@ export default {
       commit: function () {
         var reactive = {}
 
-        Object.keys(this._data).forEach((key) => {
+        var keys = new Set([
+          ...Object.keys(this._data),
+          ...Object.keys(this._listeners.keys),
+          ...Object.keys(this._getters),
+        ])
+
+        keys.forEach((key) => {
           bind(this, reactive, key)
 				})
 
