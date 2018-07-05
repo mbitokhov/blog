@@ -1,5 +1,25 @@
 <?php
 
+if (! function_exists('is_prod')) {
+    /**
+     * Return a boolean if the environment is in production
+     *
+     * @return bool
+     */
+    function is_prod()
+    {
+        $environments = [
+            'prod',
+            'production',
+            'live',
+            'demo',
+        ];
+
+        return in_array(config('app.env'), $environments, true);
+
+    }
+}
+
 if (! function_exists('urls')) {
     /**
      * Return the url of the path using either https or http using environment
@@ -11,7 +31,7 @@ if (! function_exists('urls')) {
      */
     function urls($path = null, $parameters = [])
     {
-        return url($path, $parameters, config('app.env') === 'production');
+        return url($path, $parameters, is_prod());
     }
 }
 
@@ -25,6 +45,11 @@ if (! function_exists('assets')) {
      */
     function assets($path = null)
     {
-        return asset($path, config('app.env') === 'production');
+        $file = public_path($path);
+        // I know there's gonna be an issue if the path already contains 
+        // a query, but I'm too lazy to fix it
+        $path .= '?t='.filemtime($file);
+
+        return asset($path, is_prod());
     }
 }
