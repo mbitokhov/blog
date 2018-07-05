@@ -3,11 +3,11 @@
 // Bulma
 @import "~bulma/bulma.sass";
 
-// Overwrite both browser and Bulma defaults
-@import "overwrite.scss";
-
 // Add helpers
 @import "helpers.scss";
 
-// Add classes for box-shadow
-@import "box-shadow.scss";
+// File that contains all responsive design
+@import "responsive.sass";
+
+// Overwrite both browser and Bulma defaults
+@import "tweaks.sass";

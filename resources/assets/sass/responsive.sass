@@ -1,0 +1,36 @@
+// Set default to block on IE
+#app
+  display: block
+
+// Use flex for people using modern browsers
+#app
+  display: flex
+  flex-direction: column
+
++mobile
+  #mainbox
+    // expand the mainbox to fill the entire screen
+    flex: 1 0 auto
+
+  #app
+    // Remove the outer padding for the main content for mobile
+    padding: 0px
+    margin: 0px
+
+  .section
+    // Move text closer to the sides
+    padding: .5rem .5rem
+
+  .box, input
+    // A little bit less contrast, since the entire screen is the box
+    background-color: $white-bis
+
+  .notification
+    margin: 0 !important
+
+    +box-shadow((0,0,transparent))
+
+    border: hsl(0, 0, 40%)
+    border-width: 0px
+    border-bottom-width: 1px
+    border-style: solid

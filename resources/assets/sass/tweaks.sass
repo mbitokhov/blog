@@ -1,0 +1,32 @@
+// Set background-color to a gray-white color
+html, body
+  background-color: $white-ter
+  height: 100%
+
+// Remove rounded boxes
+.box
+  border-radius: 0px
+
+// Force sticky footer
+#app
+  min-height: calc(100% - #{$footer-height} - #{$navbar-height})
+.footer
+  height: $footer-height
+
+.notification:not(:last-child)
+  margin-bottom: .5rem
+
+.notification:last-child
+  margin-bottom: 1.5rem
+
+
+// Remove spinner for number types for input
+/* For Firefox */
+input[type='number']
+  -moz-appearance: textfield
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
