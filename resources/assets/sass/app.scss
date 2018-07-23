@@ -1,7 +1,8 @@
-// Variables for Bulma
-@import "variables.scss";
-// Bulma
-@import "~bulma/bulma.sass";
+// Variables
+@import "variables.sass";
+
+// Bulma helpers
+@import "~bulma/sass/utilities/_all.sass";
 
 // Add helpers
 @import "helpers.scss";
