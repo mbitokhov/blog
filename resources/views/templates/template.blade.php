@@ -10,7 +10,18 @@
         @else
           <title> {{ config('app.name') }} </title>
         @endif
-        <link rel="stylesheet" type="text/css" href="{{ assets('css/app.css') }}" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ assets('css/bulma.css') }}"
+            integrity="sha512-{{ App\Services\FileHasher::make(public_path('css/bulma.css')) }}"
+            crossorigin="anonymous" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ assets('css/app.css') }}"
+            integrity="sha512-{{ App\Services\FileHasher::make(public_path('css/app.css')) }}"
+            crossorigin="anonymous"/>
     </head>
     <body>
         @include('templates.navbar')
@@ -26,6 +37,20 @@
 
 
         @include('templates.footer')
-        <script src="{{ assets('js/app.js') }}"></script>
+        <script
+            src="{{ assets('js/manifest.js') }}"
+            integrity="sha512-{{ App\Services\FileHasher::make(public_path('js/manifest.js'), 'sha512') }}"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="{{ assets('js/vendor.js') }}"
+            integrity="sha512-{{ App\Services\FileHasher::make(public_path('js/vendor.js'), 'sha512') }}"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="{{ assets('js/app.js') }}"
+            integrity="sha512-{{ App\Services\FileHasher::make(public_path('js/app.js'), 'sha512') }}"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>

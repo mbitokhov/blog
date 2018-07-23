@@ -46,9 +46,7 @@ if (! function_exists('assets')) {
     function assets($path = null)
     {
         $file = public_path($path);
-        // I know there's gonna be an issue if the path already contains 
-        // a query, but I'm too lazy to fix it
-        $path .= '?t='.filemtime($file);
+        $path .= '?v='.App\Services\FileHasher::make($file);
 
         return asset($path, is_prod());
     }

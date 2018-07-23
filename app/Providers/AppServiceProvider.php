@@ -23,8 +23,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Route::macro('getActive', function ($route) {
-            return $route === $this->currentRouteName() ? 'is-active' : '';
-        });
     }
 }
