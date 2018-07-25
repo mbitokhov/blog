@@ -41,7 +41,7 @@
               <label for="activity" class="label"> Activity Level: </label>
               <div class="select">
                 <select id="activity" class="input" v-model="fitnessData.activity" v-on:change="updateLocalStorage">
-                  <option value="1.2">Light to no exercise</option>
+                  <option value="1.2" selected>Light to no exercise</option>
                   <option value="1.375">Light exercise (1-3 days per week)</option>
                   <option value="1.55">Moderate exercise (3-5 days per week)</option>
                   <option value="1.725">Heavy exercise (6-7 days per week)</option>
@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="column">
-        <div class="table-container">
+        <div class="table-container" v-if="showCalculation || showLbmCalculation">
           <table class="table">
             <thead>
               <tr>
@@ -69,22 +69,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-if="showCalculation">
                 <th>Harris-Benedict</th>
                 <td>{{ harrisBenedict | round }}</td>
                 <td>{{ harrisBenedict * fitnessData.activity | round }}</td>
               </tr>
-              <tr>
+              <tr v-if="showCalculation">
                 <th>Mifflin-St Jeor</th>
                 <td>{{ mifflinStJeor | round }}</td>
                 <td>{{ mifflinStJeor * fitnessData.activity | round }}</td>
               </tr>
-              <tr v-if="fitnessData.bodyfat != ''">
+              <tr v-if="showLbmCalculation">
                 <th>Katch-McArdle</th>
                 <td>{{ katchMcArdle | round }}</td>
                 <td>{{ katchMcArdle * fitnessData.activity | round }}</td>
               </tr>
-              <tr v-if="fitnessData.bodyfat != ''">
+              <tr v-if="showLbmCalculation">
                 <th>Cunningham</th>
                 <td>{{ cunningham | round }}</td>
                 <td>{{ cunningham * fitnessData.activity | round }}</td>
@@ -98,55 +98,69 @@
 </template>
 
 <script>
-import helpers from '../helpers.js'
+import helpers from '../helpers/helpers.js'
+import calories from '../fitness/calories.js'
+import units from '../helpers/units.js'
 
 export default {
-  data: function () {
+  data() {
+    let fitnessData = helpers.objectFromStorage('fitness-data', [
+      'weight',  
+      'bodyfat', 
+      'age',     
+      'height',  
+      'activity',
+      'gender'
+    ])
+    // defaults
+    fitnessData.activity = 1.2
+
     return {
-      fitnessData: helpers.getLocalStorage('fitness-data', {
-        "weight": null,
-        "bodyfat": null,
-        "age": null,
-        "height": null,
-        "activity": null,
-        "gender": null
-      })
+      fitnessData 
     }
   },
   methods: {
-    updateLocalStorage: function (e) {
+    updateLocalStorage(e) {
       helpers.setLocalStorage('fitness-data', this.fitnessData)
     }
   },
   computed: {
-    kgWeight: function () {
-      return this.fitnessData.weight / 2.204
-    },
-    cmHeight: function () {
-      return this.fitnessData.height * 2.54
-    },
-    harrisBenedict: function () {
+    harrisBenedict() {
       if (this.fitnessData.gender === "male") {
-        return 66 + 13.7 * this.kgWeight + 5 * this.cmHeight - 6.8 * this.fitnessData.age
+        return calories.harrisBenedictMale(this.metricData)
       } else if (this.fitnessData.gender === "female") {
-        return 655 + 9.6 * this.kgWeight + 1.8 * this.cmHeight - 4.7 * this.fitnessData.age
+        return calories.harrisBenedictFemale(this.metricData)
       }
     },
-    mifflinStJeor: function () {
+    mifflinStJeor() {
       if (this.fitnessData.gender === "male") {
-        return 9.99 * this.kgWeight + 6.25 * this.cmHeight - 4.92 * this.fitnessData.age + 5
+        return calories.mifflinStJeorMale(this.metricData)
       } else if (this.fitnessData.gender === "female") {
-        return 9.99 * this.kgWeight + 6.25 * this.cmHeight - 4.92 * this.fitnessData.age - 161
+        return calories.mifflinStJeorFemale(this.metricData)
       }
     },
-    katchMcArdle: function () {
-      return 370 + 21.6 * this.lbm
+    katchMcArdle() {
+        console.log(this.lbm)
+      return calories.katchMcArdle(this.lbm)
     },
-    cunningham: function () {
-      return 500 + 22 * this.lbm
+    cunningham() {
+      return calories.cunningham(this.lbm)
+    },
+    metricData() {
+      return {
+        weight: units.lbToKg(this.fitnessData.weight),
+        height: units.inToCm(this.fitnessData.height),
+        age: this.fitnessData.age
+      }
     },
     lbm: function () {
-      return this.kgWeight * ( 1 - this.fitnessData.bodyfat / 100 )
+      return units.lbToKg(this.fitnessData.weight) * ( 1 - this.fitnessData.bodyfat / 100 )
+    },
+    showCalculation() {
+      return this.fitnessData.weight && this.fitnessData.height && this.fitnessData.age
+    },
+    showLbmCalculation() {
+      return this.fitnessData.weight && this.fitnessData.bodyfat
     }
   }
 }

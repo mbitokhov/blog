@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import helpers from '../helpers.js'
+import helpers from '../helpers/helpers.js'
 
 export default {
   data: function () {
