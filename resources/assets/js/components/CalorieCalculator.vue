@@ -113,7 +113,7 @@ export default {
       'gender'
     ])
     // defaults
-    fitnessData.activity = 1.2
+    fitnessData.activity = fitnessData.activity || 1.2
 
     return {
       fitnessData 
